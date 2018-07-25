@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecg.manager.dao.TbProductCustomMapper" >
+  <!--查询所需字段用sql片段-->
+  <sql id="Base_Column_List">
+    p.pid,p.pname,p.pnum,p.marketPrice,p.shopPrice,p.pdesc,p.pidentity,p.image,p.createdate,p.pstatus,p.hid,p.ishot,h.title AS hlTitle
+  </sql>
+  <!--判断条件的sql片段-->
+  <sql id="Where_Column">
+   <where>
+     p.pstatus != 3
+     <!--<if test="">
+     </if>-->
+   </where>
+  </sql>
+  <!--查询数量-->
+  <select id="countProducts" resultType="_long">
+     SELECT COUNT(1) FROM tb_product p
+     <include refid="Where_Column"/>
+  </select>
+<!-- 查询分页-->
+  <select id="listProductsByPage" resultType="com.ecg.manager.pojo.vo.TbProductCustom">
+     SELECT
+     <include refid="Base_Column_List"/>
+    FROM  tb_product p LEFT JOIN tb_headline h
+    ON p.hid = h.hid
+    <include refid="Where_Column"/>
+    limit #{pageParam.offset},#{pageParam.limit}
+  </select>
+</mapper>
