@@ -1,7 +1,11 @@
 package com.ecg.manager.service;
 import com.ecg.manager.pojo.dto.PageParam;
+import com.ecg.manager.pojo.dto.ProductQuery;
 import com.ecg.manager.pojo.dto.ProductResult;
+import com.ecg.manager.pojo.po.TbProduct;
 import com.ecg.manager.pojo.vo.TbProductCustom;
+
+import java.util.List;
 
 /**
  * 〈一句话功能简述〉<br>
@@ -14,9 +18,53 @@ import com.ecg.manager.pojo.vo.TbProductCustom;
 public interface ProductService {
 
     /**
-     *
+     *根据条件返回产品
      * @param pageParam
+     * @param productQuery
      * @return TbProductCustom
      */
-    ProductResult<TbProductCustom> listProduct(PageParam pageParam);
+    ProductResult<TbProductCustom> listProduct(PageParam pageParam, ProductQuery productQuery);
+
+    /**
+     * 添加产品
+     * @return int
+     * @param product
+     */
+    int insertProduct(TbProduct product);
+
+    /**
+     * 根据pid删除产品
+     * @param pid
+     * @return int
+     */
+    int updateProductByPid(String pid);
+
+    /**
+     * 根据pids批量删除
+     * @param pids
+     * @return int
+     */
+    int updateProductsByPids(List<String> pids);
+
+    /**
+     * 修改任意属性
+     * @param product
+     * @return
+     */
+    int editProduct(TbProduct product);
+
+    /**
+     * 根据pid获得产品回显
+     * @param pid
+     * @return TbProduct
+     */
+    TbProduct getProduct(String pid);
+
+    /**
+     * 根据主键更新产品信息
+     * @param product
+     * @return int
+     */
+    int updateProduct(TbProduct product);
+
 }

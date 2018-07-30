@@ -16,8 +16,9 @@ public interface TbProductCustomMapper {
     /**
      * 返回所有产品数量
      * @return long
+     * @param map
      */
-    long countProducts();
+    long countProducts(Map<String, Object> map);
 
     /**
      * 返回所有商品的分页和查询数据

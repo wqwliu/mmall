@@ -592,63 +592,63 @@ public class TbProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateIsNull() {
-            addCriterion("create is null");
+        public Criteria andCreatedateIsNull() {
+            addCriterion("createdate is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIsNotNull() {
-            addCriterion("create is not null");
+        public Criteria andCreatedateIsNotNull() {
+            addCriterion("createdate is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateEqualTo(Date value) {
-            addCriterionForJDBCDate("create =", value, "create");
+        public Criteria andCreatedateEqualTo(Date value) {
+            addCriterionForJDBCDate("createdate =", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("create <>", value, "create");
+        public Criteria andCreatedateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("createdate <>", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreateGreaterThan(Date value) {
-            addCriterionForJDBCDate("create >", value, "create");
+        public Criteria andCreatedateGreaterThan(Date value) {
+            addCriterionForJDBCDate("createdate >", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("create >=", value, "create");
+        public Criteria andCreatedateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("createdate >=", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreateLessThan(Date value) {
-            addCriterionForJDBCDate("create <", value, "create");
+        public Criteria andCreatedateLessThan(Date value) {
+            addCriterionForJDBCDate("createdate <", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("create <=", value, "create");
+        public Criteria andCreatedateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("createdate <=", value, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreateIn(List<Date> values) {
-            addCriterionForJDBCDate("create in", values, "create");
+        public Criteria andCreatedateIn(List<Date> values) {
+            addCriterionForJDBCDate("createdate in", values, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("create not in", values, "create");
+        public Criteria andCreatedateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("createdate not in", values, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("create between", value1, value2, "create");
+        public Criteria andCreatedateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("createdate between", value1, value2, "createdate");
             return (Criteria) this;
         }
 
-        public Criteria andCreateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("create not between", value1, value2, "create");
+        public Criteria andCreatedateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("createdate not between", value1, value2, "createdate");
             return (Criteria) this;
         }
 

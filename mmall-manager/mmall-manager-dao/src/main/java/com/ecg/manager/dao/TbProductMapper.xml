@@ -9,7 +9,7 @@
     <result column="shopPrice" property="shopprice" jdbcType="DOUBLE" />
     <result column="pidentity" property="pidentity" jdbcType="VARCHAR" />
     <result column="image" property="image" jdbcType="VARCHAR" />
-    <result column="create" property="create" jdbcType="DATE" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
     <result column="pstatus" property="pstatus" jdbcType="INTEGER" />
     <result column="hid" property="hid" jdbcType="VARCHAR" />
     <result column="ishot" property="ishot" jdbcType="VARCHAR" />
@@ -76,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    pid, pname, pnum, marketPrice, shopPrice, pidentity, image, create, pstatus, hid, 
-    ishot
+    pid, pname, pnum, marketPrice, shopPrice, pidentity, image, createdate, pstatus, 
+    hid, ishot
   </sql>
   <sql id="Blob_Column_List" >
     pdesc
@@ -133,12 +133,12 @@
   <insert id="insert" parameterType="com.ecg.manager.pojo.po.TbProduct" >
     insert into tb_product (pid, pname, pnum, 
       marketPrice, shopPrice, pidentity, 
-      image, create, pstatus, 
+      image, createdate, pstatus, 
       hid, ishot, pdesc
       )
     values (#{pid,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR}, #{pnum,jdbcType=INTEGER}, 
       #{marketprice,jdbcType=DOUBLE}, #{shopprice,jdbcType=DOUBLE}, #{pidentity,jdbcType=VARCHAR}, 
-      #{image,jdbcType=VARCHAR}, #{create,jdbcType=DATE}, #{pstatus,jdbcType=INTEGER}, 
+      #{image,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{pstatus,jdbcType=INTEGER}, 
       #{hid,jdbcType=VARCHAR}, #{ishot,jdbcType=VARCHAR}, #{pdesc,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -166,8 +166,8 @@
       <if test="image != null" >
         image,
       </if>
-      <if test="create != null" >
-        create,
+      <if test="createdate != null" >
+        createdate,
       </if>
       <if test="pstatus != null" >
         pstatus,
@@ -204,8 +204,8 @@
       <if test="image != null" >
         #{image,jdbcType=VARCHAR},
       </if>
-      <if test="create != null" >
-        #{create,jdbcType=DATE},
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
       </if>
       <if test="pstatus != null" >
         #{pstatus,jdbcType=INTEGER},
@@ -251,8 +251,8 @@
       <if test="record.image != null" >
         image = #{record.image,jdbcType=VARCHAR},
       </if>
-      <if test="record.create != null" >
-        create = #{record.create,jdbcType=DATE},
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=DATE},
       </if>
       <if test="record.pstatus != null" >
         pstatus = #{record.pstatus,jdbcType=INTEGER},
@@ -280,7 +280,7 @@
       shopPrice = #{record.shopprice,jdbcType=DOUBLE},
       pidentity = #{record.pidentity,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR},
-      create = #{record.create,jdbcType=DATE},
+      createdate = #{record.createdate,jdbcType=DATE},
       pstatus = #{record.pstatus,jdbcType=INTEGER},
       hid = #{record.hid,jdbcType=VARCHAR},
       ishot = #{record.ishot,jdbcType=VARCHAR},
@@ -298,7 +298,7 @@
       shopPrice = #{record.shopprice,jdbcType=DOUBLE},
       pidentity = #{record.pidentity,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR},
-      create = #{record.create,jdbcType=DATE},
+      createdate = #{record.createdate,jdbcType=DATE},
       pstatus = #{record.pstatus,jdbcType=INTEGER},
       hid = #{record.hid,jdbcType=VARCHAR},
       ishot = #{record.ishot,jdbcType=VARCHAR}
@@ -327,8 +327,8 @@
       <if test="image != null" >
         image = #{image,jdbcType=VARCHAR},
       </if>
-      <if test="create != null" >
-        create = #{create,jdbcType=DATE},
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
       </if>
       <if test="pstatus != null" >
         pstatus = #{pstatus,jdbcType=INTEGER},
@@ -353,7 +353,7 @@
       shopPrice = #{shopprice,jdbcType=DOUBLE},
       pidentity = #{pidentity,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
-      create = #{create,jdbcType=DATE},
+      createdate = #{createdate,jdbcType=DATE},
       pstatus = #{pstatus,jdbcType=INTEGER},
       hid = #{hid,jdbcType=VARCHAR},
       ishot = #{ishot,jdbcType=VARCHAR},
@@ -368,7 +368,7 @@
       shopPrice = #{shopprice,jdbcType=DOUBLE},
       pidentity = #{pidentity,jdbcType=VARCHAR},
       image = #{image,jdbcType=VARCHAR},
-      create = #{create,jdbcType=DATE},
+      createdate = #{createdate,jdbcType=DATE},
       pstatus = #{pstatus,jdbcType=INTEGER},
       hid = #{hid,jdbcType=VARCHAR},
       ishot = #{ishot,jdbcType=VARCHAR}

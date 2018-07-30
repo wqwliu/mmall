@@ -17,7 +17,7 @@ public class TbProduct {
 
     private String image;
 
-    private Date create;
+    private Date createdate;
 
     private Integer pstatus;
 
@@ -83,12 +83,12 @@ public class TbProduct {
         this.image = image == null ? null : image.trim();
     }
 
-    public Date getCreate() {
-        return create;
+    public Date getCreatedate() {
+        return createdate;
     }
 
-    public void setCreate(Date create) {
-        this.create = create;
+    public void setCreatedate(Date createdate) {
+        this.createdate = createdate;
     }
 
     public Integer getPstatus() {
