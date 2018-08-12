@@ -4,7 +4,7 @@
     <!--查询所需字段用sql片段-->
     <sql id="Base_Column_List">
     p.pid,p.pname,p.pnum,p.marketPrice,p.shopPrice,p.pdesc,p.pidentity,p.image,p.createdate,p.pstatus,p.hid,p.ishot,h.title AS hlTitle
-  </sql>
+    </sql>
     <!--判断条件的sql片段-->
     <sql id="Where_Column">
         <where>
@@ -15,8 +15,17 @@
             <if test="productQuery != null and productQuery.pid != null and productQuery.pid !=''">
                 AND p.pid LIKE '%${productQuery.pid}%'
             </if>
-            <if test="productQuery != null and productQuery.pstatus != null and productQuery.pstatus !=''">
-                AND p.pstatus LIKE '%${productQuery.pstatus}%'
+            <if test="productQuery != null and list != null and list.size() > 0 ">
+                AND p.hid IN
+                <foreach collection="list" open="(" close=")" index="index" item="item" separator=",">
+                 #{item}
+                </foreach>
+            </if>
+            <if test="productQuery != null and productQuery.priceMin != null and productQuery.priceMin !=''">
+                AND p.shopPrice &gt;= #{productQuery.priceMin}
+            </if>
+            <if test="productQuery != null and productQuery.priceMax != null and productQuery.priceMax !=''">
+                AND p.shopPrice &lt;= #{productQuery.priceMax}
             </if>
         </where>
     </sql>
@@ -33,5 +42,9 @@
         ON p.hid = h.hid
         <include refid="Where_Column"/>
         limit #{pageParam.offset},#{pageParam.limit}
+    </select>
+
+    <select id="getHidList" parameterType="string" resultType="string">
+        SELECT hid FROM tb_headline WHERE parend_id = #{hid}
     </select>
 </mapper>

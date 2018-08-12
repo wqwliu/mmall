@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecg.search.dao.SearchMapperCustom" >
+  <select id="getSearchProductList" resultType="com.ecg.search.pojo.vo.SearchProductVo">
+    SELECT
+    p.pid,
+    p.pname,
+    p.pidentity,
+    p.image,
+    p.shopPrice,
+    h.title as catName
+    from
+    tb_product p
+    left join tb_headline h on p.hid = h.hid
+    where
+    p.pstatus = 1
+    order by p.pid desc
+  </select>
+</mapper>

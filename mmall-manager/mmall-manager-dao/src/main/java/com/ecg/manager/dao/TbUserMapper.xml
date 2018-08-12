@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecg.manager.dao.TbUserMapper">
+    <resultMap id="BaseResultMap" type="com.ecg.manager.pojo.po.TbUser">
+        <id column="uid" jdbcType="VARCHAR" property="uid" />
+        <result column="uname" jdbcType="VARCHAR" property="uname" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="usex" jdbcType="VARCHAR" property="usex" />
+        <result column="uphone" jdbcType="VARCHAR" property="uphone" />
+        <result column="uemail" jdbcType="VARCHAR" property="uemail" />
+        <result column="umoney" jdbcType="DOUBLE" property="umoney" />
+        <result column="ubirthday" jdbcType="DATE" property="ubirthday" />
+        <result column="createdate" jdbcType="DATE" property="createdate" />
+        <result column="image" jdbcType="VARCHAR" property="image" />
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        uid, uname, username, password, usex, uphone, uemail, umoney, ubirthday, createdate,
+        image,statu
+    </sql>
+    <select id="selectByExample" parameterType="com.ecg.manager.pojo.po.TbUserExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from tb_user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_user
+        where uid = #{uid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from tb_user
+        where uid = #{uid,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.ecg.manager.pojo.po.TbUserExample">
+        delete from tb_user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.ecg.manager.pojo.po.TbUser">
+        insert into tb_user (uid, uname, username,
+        password, usex, uphone,
+        uemail, umoney, ubirthday,
+        createdate, image)
+        values (#{uid,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}, #{usex,jdbcType=VARCHAR}, #{uphone,jdbcType=VARCHAR},
+        #{uemail,jdbcType=VARCHAR}, #{umoney,jdbcType=DOUBLE}, #{ubirthday,jdbcType=DATE},
+        #{createdate,jdbcType=DATE}, #{image,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ecg.manager.pojo.po.TbUser">
+        insert into tb_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="uname != null">
+                uname,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="usex != null">
+                usex,
+            </if>
+            <if test="uphone != null">
+                uphone,
+            </if>
+            <if test="uemail != null">
+                uemail,
+            </if>
+            <if test="umoney != null">
+                umoney,
+            </if>
+            <if test="ubirthday != null">
+                ubirthday,
+            </if>
+            <if test="createdate != null">
+                createdate,
+            </if>
+            <if test="image != null">
+                image,
+            </if>
+            <if test="statu != null">
+                statu,
+            </if>
+            <if test="card != null">
+                card,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="uname != null">
+                #{uname,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="usex != null">
+                #{usex,jdbcType=VARCHAR},
+            </if>
+            <if test="uphone != null">
+                #{uphone,jdbcType=VARCHAR},
+            </if>
+            <if test="uemail != null">
+                #{uemail,jdbcType=VARCHAR},
+            </if>
+            <if test="umoney != null">
+                #{umoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ubirthday != null">
+                #{ubirthday,jdbcType=DATE},
+            </if>
+            <if test="createdate != null">
+                #{createdate,jdbcType=DATE},
+            </if>
+            <if test="image != null">
+                #{image,jdbcType=VARCHAR},
+            </if>
+            <if test="statu != null">
+                #{statu,jdbcType=VARCHAR},
+            </if>
+            <if test="card != null">
+                #{card,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.ecg.manager.pojo.po.TbUserExample" resultType="java.lang.Long">
+        select count(*) from tb_user
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update tb_user
+        <set>
+            <if test="record.uid != null">
+                uid = #{record.uid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.uname != null">
+                uname = #{record.uname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.username != null">
+                username = #{record.username,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.usex != null">
+                usex = #{record.usex,jdbcType=VARCHAR},
+            </if>
+            <if test="record.uphone != null">
+                uphone = #{record.uphone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.uemail != null">
+                uemail = #{record.uemail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.umoney != null">
+                umoney = #{record.umoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.ubirthday != null">
+                ubirthday = #{record.ubirthday,jdbcType=DATE},
+            </if>
+            <if test="record.createdate != null">
+                createdate = #{record.createdate,jdbcType=DATE},
+            </if>
+            <if test="record.image != null">
+                image = #{record.image,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update tb_user
+        set uid = #{record.uid,jdbcType=VARCHAR},
+        uname = #{record.uname,jdbcType=VARCHAR},
+        username = #{record.username,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
+        usex = #{record.usex,jdbcType=VARCHAR},
+        uphone = #{record.uphone,jdbcType=VARCHAR},
+        uemail = #{record.uemail,jdbcType=VARCHAR},
+        umoney = #{record.umoney,jdbcType=DOUBLE},
+        ubirthday = #{record.ubirthday,jdbcType=DATE},
+        createdate = #{record.createdate,jdbcType=DATE},
+        image = #{record.image,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ecg.manager.pojo.po.TbUser">
+        update tb_user
+        <set>
+            <if test="uname != null">
+                uname = #{uname,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="usex != null">
+                usex = #{usex,jdbcType=VARCHAR},
+            </if>
+            <if test="uphone != null">
+                uphone = #{uphone,jdbcType=VARCHAR},
+            </if>
+            <if test="uemail != null">
+                uemail = #{uemail,jdbcType=VARCHAR},
+            </if>
+            <if test="umoney != null">
+                umoney = #{umoney,jdbcType=DOUBLE},
+            </if>
+            <if test="ubirthday != null">
+                ubirthday = #{ubirthday,jdbcType=DATE},
+            </if>
+            <if test="createdate != null">
+                createdate = #{createdate,jdbcType=DATE},
+            </if>
+            <if test="image != null">
+                image = #{image,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where uid = #{uid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ecg.manager.pojo.po.TbUser">
+        update tb_user
+        set uname = #{uname,jdbcType=VARCHAR},
+        username = #{username,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        usex = #{usex,jdbcType=VARCHAR},
+        uphone = #{uphone,jdbcType=VARCHAR},
+        uemail = #{uemail,jdbcType=VARCHAR},
+        umoney = #{umoney,jdbcType=DOUBLE},
+        ubirthday = #{ubirthday,jdbcType=DATE},
+        createdate = #{createdate,jdbcType=DATE},
+        image = #{image,jdbcType=VARCHAR}
+        where uid = #{uid,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectUser" parameterType="java.lang.String"  resultType="com.ecg.manager.pojo.po.TbUser">
+        SELECT * FROM tb_user where (uname =#{uname} or uphone=#{uname}) and password = #{password} and statu !=3
+
+    </select>
+
+    <update id="deleteUser" parameterType="java.lang.String" >
+        UPDATE tb_user SET statu = 3 WHERE  uid =#{uid}
+    </update>
+
+    <select id="getUsersList"  resultType="com.ecg.manager.pojo.po.TbUser">
+
+        SELECT
+        <include refid="Base_Column_List" />
+        from tb_user  where statu !=3
+        <if test="userSearch!=null and userSearch.uname !=null and userSearch.uname!='' ">
+            and   uname like "%"#{userSearch.uname}"%"
+        </if>
+        <if test="userSearch!=null !=null and userSearch.start !='' and userSearch.start !=null">
+            and  createdate &gt;=  #{userSearch.start}
+        </if>
+        <if test="userSearch !=null and userSearch.end !='' and userSearch.end != null">
+            and   createdate &lt;= #{userSearch.end}
+        </if>
+        limit #{pageParam.offset},#{pageParam.limit}
+    </select>
+
+    <select id="getUsers"  resultType="java.lang.Long">
+
+        select COUNT(*) FROM  tb_user
+        <where>
+            statu != 3
+            <if test="userSearch!=null and userSearch.uname !=null and userSearch.uname!='' ">
+                and   uname like "%"#{userSearch.uname}"%"
+            </if>
+            <if test="userSearch!=null !=null and userSearch.start !='' and userSearch.start !=null">
+                and  createdate &gt;=  #{userSearch.start}
+            </if>
+            <if test="userSearch !=null and userSearch.end !='' and userSearch.end != null">
+                and   createdate &lt;= #{userSearch.end}
+            </if>
+        </where>
+
+
+    </select>
+
+    <select id="getUserById" parameterType="java.lang.String" resultType="com.ecg.manager.pojo.po.TbUser">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tb_user where uid = #{uid} and statu !=3
+
+    </select>
+
+    <update id="updateUser" parameterType="com.ecg.manager.pojo.po.TbUser">
+        UPDATE tb_user SET uname = #{uname},password=#{password},usex=#{usex},uphone=#{uphone},uemail=#{uemail} WHERE uid = #{uid}
+
+
+    </update>
+    <update id="removeUserAll" parameterType="java.util.List">
+        UPDATE  tb_user set statu = 3 WHERE uid IN
+        <foreach collection="list" item="uid"
+                 open="(" close=")" index="index" separator=",">
+            #{uid}
+        </foreach>
+
+    </update>
+
+    <update id="updateUserStatu" parameterType="java.lang.String" >
+
+        UPDATE tb_user SET statu = #{arg1} WHERE uid = #{arg0}
+    </update>
+
+
+
+</mapper>

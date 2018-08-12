@@ -2,18 +2,24 @@ package com.ecg.manager.service.impl;
 
 import com.ecg.manager.dao.TbProductCustomMapper;
 import com.ecg.manager.dao.TbProductMapper;
+import com.ecg.manager.dao.TbSearchMapperCustom;
 import com.ecg.manager.pojo.dto.PageParam;
 import com.ecg.manager.pojo.dto.ProductQuery;
 import com.ecg.manager.pojo.dto.ProductResult;
 import com.ecg.manager.pojo.po.TbProduct;
 import com.ecg.manager.pojo.po.TbProductExample;
+import com.ecg.manager.pojo.vo.SearchProductVo;
 import com.ecg.manager.pojo.vo.TbProductCustom;
 import com.ecg.manager.service.ProductService;
+import org.apache.solr.client.solrj.SolrServer;
+import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.common.SolrInputDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +41,10 @@ public class ProductServiceImpl implements ProductService {
     private TbProductCustomMapper productCustomDao;
     @Autowired
     private TbProductMapper productDao;
+    @Autowired
+    private TbSearchMapperCustom searchMapperDao;
+    @Autowired
+    private SolrServer solrServer;
 
     @Override
     public ProductResult<TbProductCustom> listProduct(PageParam pageParam, ProductQuery productQuery) {
@@ -46,10 +56,12 @@ public class ProductServiceImpl implements ProductService {
             Map<String, Object> map = new HashMap<>();
             map.put("pageParam", pageParam);
             map.put("productQuery",productQuery);
+            //获得hid的list集合
+            List<String> hidList = productCustomDao.getHidList(productQuery.getHid());
             //count
-            long count = productCustomDao.countProducts(map);
+            long count = productCustomDao.countProducts(productQuery,hidList);
             result.setCount(count);
-            List<TbProductCustom> data = productCustomDao.listProductsByPage(map);
+            List<TbProductCustom> data = productCustomDao.listProductsByPage(pageParam,productQuery,hidList);
             result.setData(data);
         } catch (Exception e) {
             result.setCode(1);
@@ -65,7 +77,19 @@ public class ProductServiceImpl implements ProductService {
         int i = 0;
         String pid = UUID.randomUUID().toString().replaceAll("-","");
         product.setPid(pid);
-        product.setPstatus(2);
+        product.setPstatus((int) (Math.random() + 1));
+        String image = product.getImage();
+        String[] split = image.split("\"");
+        StringBuilder imag = new StringBuilder();
+        for (String s:split) {
+            if(s.contains("http")){
+                imag.append(s).append(",");
+
+            }
+        }
+        imag.deleteCharAt(imag.length() - 1);
+        String ima = imag.toString();
+        product.setImage(ima);
         try {
             i = productDao.insert(product);
         } catch (Exception e) {
@@ -144,5 +168,35 @@ public class ProductServiceImpl implements ProductService {
             e.printStackTrace();
         }
         return i;
+    }
+
+    @Override
+    public void importSearchItem() throws IOException, SolrServerException {
+        try {
+            //1 采集数据
+            List<SearchProductVo> searchProductList = searchMapperDao.getSearchProductList();
+            //2 导入索引库（遍历集合 documentList）
+            for (SearchProductVo p:searchProductList) {
+                SolrInputDocument document = new SolrInputDocument();
+                document.addField("id",p.getPid());
+                document.addField("item_pname",p.getPname());
+                document.addField("item_pidentity",p.getPidentity());
+                document.addField("item_price",p.getShopPrice());
+                document.addField("item_image",p.getImage());
+                document.addField("item_category_name",p.getCatName());
+                //c addDocument
+                solrServer.add(document);
+            }
+            solrServer.commit();
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+            logger.error(e.getMessage(),e);
+        } catch (IOException e1) {
+            logger.error(e1.getMessage(),e1);
+            e1.printStackTrace();
+        } catch (Exception e2){
+            logger.error(e2.getMessage(),e2);
+            e2.printStackTrace();
+        }
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecg.manager.dao.TbOrderCustomMapper" >
+  <!--查询所需字段用sql片段-->
+  <sql id="Base_Column_List">
+    o.orderitemid,o.pname,o.pcount,o.price,o.image,o.oid,o.pid,oi.receiveName,oi.ostatus,oi.receivePhone
+  </sql>
+
+  <!--判断条件的sql片段-->
+  <sql id="Where_Column">
+  <where>
+    <if test="orderQuery != null and orderQuery.orderitemid != null and orderQuery.orderitemid !=''">
+      AND o.orderitemid LIKE '%${orderQuery.orderitemid}%'
+    </if>
+    <if test="orderQuery != null and orderQuery.pname != null and orderQuery.pname !=''">
+      AND o.pname LIKE '%${orderQuery.pname}%'
+    </if>
+  </where>
+  </sql>
+
+  <!--查询数量-->
+  <select id="countOrders" resultType="_long">
+    SELECT COUNT(1) FROM tb_orderitems o
+    <include refid="Where_Column"/>
+  </select>
+  <!-- 查询分页-->
+  <select id="listOrdersByPage" resultType="com.ecg.manager.pojo.vo.TbOrderCustom">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tb_orderitems o LEFT JOIN tb_order oi
+    ON o.oid = oi.oid
+    <include refid="Where_Column"/>
+    limit #{pageParam.offset},#{pageParam.limit}
+  </select>
+</mapper>

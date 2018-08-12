@@ -16,27 +16,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ViewController {
 
-    @RequestMapping(value = "/",method = RequestMethod.GET)
+    @RequestMapping(value = "/")
     public String login(){
-        return "login";
+        return "index";
     }
 
-    @RequestMapping(value = "/{path}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{path}")
     public String view(@PathVariable String path){
         return path;
     }
 
-    @RequestMapping(value = "/pages/{path1}",method = RequestMethod.GET)
+    @RequestMapping(value = "/pages/{path1}")
     public String view2(@PathVariable String path1){
         return "pages/"+path1;
     }
 
-    @RequestMapping(value = "/pages/{path1}/{path2}",method = RequestMethod.GET)
+    @RequestMapping(value = "/pages/{path1}/{path2}")
     public String view2(@PathVariable String path1,@PathVariable String path2){
         return "pages/"+path1+"/"+path2;
     }
 
-    @RequestMapping(value = "/pages/{path1}/{path2}/{path3}",method = RequestMethod.GET)
+    @RequestMapping(value = "/pages/{path1}/{path2}/{path3}")
     public String view2(@PathVariable String path1,@PathVariable String path2,@PathVariable String path3){
         return "pages/"+path1+"/"+path2+"/"+path3;
     }

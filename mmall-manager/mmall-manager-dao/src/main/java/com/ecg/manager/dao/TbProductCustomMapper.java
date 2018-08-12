@@ -1,6 +1,9 @@
 package com.ecg.manager.dao;
 
+import com.ecg.manager.pojo.dto.PageParam;
+import com.ecg.manager.pojo.dto.ProductQuery;
 import com.ecg.manager.pojo.vo.TbProductCustom;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -15,15 +18,25 @@ import java.util.Map;
 public interface TbProductCustomMapper {
     /**
      * 返回所有产品数量
-     * @return long
-     * @param map
+     * @param productQuery
+     * @param hidList
+     * @return
      */
-    long countProducts(Map<String, Object> map);
+    long countProducts(@Param("productQuery")ProductQuery productQuery, @Param("list")List<String> hidList);
 
     /**
      * 返回所有商品的分页和查询数据
-     * @param map
-     * @return TbProductCustom
+     * @param pageParam
+     * @param productQuery
+     * @param hidList
+     * @return
      */
-    List<TbProductCustom> listProductsByPage(Map<String, Object> map);
+    List<TbProductCustom> listProductsByPage(@Param("pageParam")PageParam pageParam,@Param("productQuery")ProductQuery productQuery, @Param("list") List<String> hidList);
+
+    /**
+     * 查询hl表格获得hid的list
+     * @param hid
+     * @return
+     */
+    List<String> getHidList(String hid);
 }

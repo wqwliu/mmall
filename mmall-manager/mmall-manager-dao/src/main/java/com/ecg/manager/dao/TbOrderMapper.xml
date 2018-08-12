@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecg.manager.dao.TbOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.ecg.manager.pojo.po.TbOrder" >
+    <id column="oid" property="oid" jdbcType="VARCHAR" />
+    <result column="total_money" property="totalMoney" jdbcType="DOUBLE" />
+    <result column="ostatus" property="ostatus" jdbcType="INTEGER" />
+    <result column="odate" property="odate" jdbcType="DATE" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="postage" property="postage" jdbcType="DOUBLE" />
+    <result column="paydate" property="paydate" jdbcType="DATE" />
+    <result column="senddate" property="senddate" jdbcType="DATE" />
+    <result column="receivedate" property="receivedate" jdbcType="DATE" />
+    <result column="receiveName" property="receivename" jdbcType="VARCHAR" />
+    <result column="receiveAddress" property="receiveaddress" jdbcType="VARCHAR" />
+    <result column="receivePhone" property="receivephone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    oid, total_money, ostatus, odate, uid, postage, paydate, senddate, receivedate, receiveName, 
+    receiveAddress, receivePhone
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ecg.manager.pojo.po.TbOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order
+    where oid = #{oid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_order
+    where oid = #{oid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ecg.manager.pojo.po.TbOrderExample" >
+    delete from tb_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ecg.manager.pojo.po.TbOrder" >
+    insert into tb_order (oid, total_money, ostatus, 
+      odate, uid, postage, paydate, 
+      senddate, receivedate, receiveName, 
+      receiveAddress, receivePhone)
+    values (#{oid,jdbcType=VARCHAR}, #{totalMoney,jdbcType=DOUBLE}, #{ostatus,jdbcType=INTEGER}, 
+      #{odate,jdbcType=DATE}, #{uid,jdbcType=VARCHAR}, #{postage,jdbcType=DOUBLE}, #{paydate,jdbcType=DATE}, 
+      #{senddate,jdbcType=DATE}, #{receivedate,jdbcType=DATE}, #{receivename,jdbcType=VARCHAR}, 
+      #{receiveaddress,jdbcType=VARCHAR}, #{receivephone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecg.manager.pojo.po.TbOrder" >
+    insert into tb_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="totalMoney != null" >
+        total_money,
+      </if>
+      <if test="ostatus != null" >
+        ostatus,
+      </if>
+      <if test="odate != null" >
+        odate,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="postage != null" >
+        postage,
+      </if>
+      <if test="paydate != null" >
+        paydate,
+      </if>
+      <if test="senddate != null" >
+        senddate,
+      </if>
+      <if test="receivedate != null" >
+        receivedate,
+      </if>
+      <if test="receivename != null" >
+        receiveName,
+      </if>
+      <if test="receiveaddress != null" >
+        receiveAddress,
+      </if>
+      <if test="receivephone != null" >
+        receivePhone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalMoney != null" >
+        #{totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="ostatus != null" >
+        #{ostatus,jdbcType=INTEGER},
+      </if>
+      <if test="odate != null" >
+        #{odate,jdbcType=DATE},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="postage != null" >
+        #{postage,jdbcType=DOUBLE},
+      </if>
+      <if test="paydate != null" >
+        #{paydate,jdbcType=DATE},
+      </if>
+      <if test="senddate != null" >
+        #{senddate,jdbcType=DATE},
+      </if>
+      <if test="receivedate != null" >
+        #{receivedate,jdbcType=DATE},
+      </if>
+      <if test="receivename != null" >
+        #{receivename,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveaddress != null" >
+        #{receiveaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receivephone != null" >
+        #{receivephone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ecg.manager.pojo.po.TbOrderExample" resultType="java.lang.Integer" >
+    select count(*) from tb_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_order
+    <set >
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalMoney != null" >
+        total_money = #{record.totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.ostatus != null" >
+        ostatus = #{record.ostatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.odate != null" >
+        odate = #{record.odate,jdbcType=DATE},
+      </if>
+      <if test="record.uid != null" >
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postage != null" >
+        postage = #{record.postage,jdbcType=DOUBLE},
+      </if>
+      <if test="record.paydate != null" >
+        paydate = #{record.paydate,jdbcType=DATE},
+      </if>
+      <if test="record.senddate != null" >
+        senddate = #{record.senddate,jdbcType=DATE},
+      </if>
+      <if test="record.receivedate != null" >
+        receivedate = #{record.receivedate,jdbcType=DATE},
+      </if>
+      <if test="record.receivename != null" >
+        receiveName = #{record.receivename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveaddress != null" >
+        receiveAddress = #{record.receiveaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivephone != null" >
+        receivePhone = #{record.receivephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_order
+    set oid = #{record.oid,jdbcType=VARCHAR},
+      total_money = #{record.totalMoney,jdbcType=DOUBLE},
+      ostatus = #{record.ostatus,jdbcType=INTEGER},
+      odate = #{record.odate,jdbcType=DATE},
+      uid = #{record.uid,jdbcType=VARCHAR},
+      postage = #{record.postage,jdbcType=DOUBLE},
+      paydate = #{record.paydate,jdbcType=DATE},
+      senddate = #{record.senddate,jdbcType=DATE},
+      receivedate = #{record.receivedate,jdbcType=DATE},
+      receiveName = #{record.receivename,jdbcType=VARCHAR},
+      receiveAddress = #{record.receiveaddress,jdbcType=VARCHAR},
+      receivePhone = #{record.receivephone,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecg.manager.pojo.po.TbOrder" >
+    update tb_order
+    <set >
+      <if test="totalMoney != null" >
+        total_money = #{totalMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="ostatus != null" >
+        ostatus = #{ostatus,jdbcType=INTEGER},
+      </if>
+      <if test="odate != null" >
+        odate = #{odate,jdbcType=DATE},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="postage != null" >
+        postage = #{postage,jdbcType=DOUBLE},
+      </if>
+      <if test="paydate != null" >
+        paydate = #{paydate,jdbcType=DATE},
+      </if>
+      <if test="senddate != null" >
+        senddate = #{senddate,jdbcType=DATE},
+      </if>
+      <if test="receivedate != null" >
+        receivedate = #{receivedate,jdbcType=DATE},
+      </if>
+      <if test="receivename != null" >
+        receiveName = #{receivename,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveaddress != null" >
+        receiveAddress = #{receiveaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receivephone != null" >
+        receivePhone = #{receivephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oid = #{oid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecg.manager.pojo.po.TbOrder" >
+    update tb_order
+    set total_money = #{totalMoney,jdbcType=DOUBLE},
+      ostatus = #{ostatus,jdbcType=INTEGER},
+      odate = #{odate,jdbcType=DATE},
+      uid = #{uid,jdbcType=VARCHAR},
+      postage = #{postage,jdbcType=DOUBLE},
+      paydate = #{paydate,jdbcType=DATE},
+      senddate = #{senddate,jdbcType=DATE},
+      receivedate = #{receivedate,jdbcType=DATE},
+      receiveName = #{receivename,jdbcType=VARCHAR},
+      receiveAddress = #{receiveaddress,jdbcType=VARCHAR},
+      receivePhone = #{receivephone,jdbcType=VARCHAR}
+    where oid = #{oid,jdbcType=VARCHAR}
+  </update>
+</mapper>

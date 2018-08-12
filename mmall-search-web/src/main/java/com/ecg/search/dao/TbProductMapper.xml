@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecg.search.dao.TbProductMapper" >
+  <resultMap id="BaseResultMap" type="com.ecg.search.pojo.po.TbProduct" >
+    <id column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="pname" property="pname" jdbcType="VARCHAR" />
+    <result column="pnum" property="pnum" jdbcType="INTEGER" />
+    <result column="marketPrice" property="marketprice" jdbcType="DOUBLE" />
+    <result column="shopPrice" property="shopprice" jdbcType="DOUBLE" />
+    <result column="pidentity" property="pidentity" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="pstatus" property="pstatus" jdbcType="INTEGER" />
+    <result column="hid" property="hid" jdbcType="VARCHAR" />
+    <result column="ishot" property="ishot" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ecg.search.pojo.po.TbProduct" extends="BaseResultMap" >
+    <result column="pdesc" property="pdesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pid, pname, pnum, marketPrice, shopPrice, pidentity, image, createdate, pstatus, 
+    hid, ishot
+  </sql>
+  <sql id="Blob_Column_List" >
+    pdesc
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.ecg.search.pojo.po.TbProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ecg.search.pojo.po.TbProductExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_product
+    where pid = #{pid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_product
+    where pid = #{pid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ecg.search.pojo.po.TbProductExample" >
+    delete from tb_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ecg.search.pojo.po.TbProduct" >
+    insert into tb_product (pid, pname, pnum, 
+      marketPrice, shopPrice, pidentity, 
+      image, createdate, pstatus, 
+      hid, ishot, pdesc
+      )
+    values (#{pid,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR}, #{pnum,jdbcType=INTEGER}, 
+      #{marketprice,jdbcType=DOUBLE}, #{shopprice,jdbcType=DOUBLE}, #{pidentity,jdbcType=VARCHAR}, 
+      #{image,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{pstatus,jdbcType=INTEGER}, 
+      #{hid,jdbcType=VARCHAR}, #{ishot,jdbcType=VARCHAR}, #{pdesc,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecg.search.pojo.po.TbProduct" >
+    insert into tb_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="pname != null" >
+        pname,
+      </if>
+      <if test="pnum != null" >
+        pnum,
+      </if>
+      <if test="marketprice != null" >
+        marketPrice,
+      </if>
+      <if test="shopprice != null" >
+        shopPrice,
+      </if>
+      <if test="pidentity != null" >
+        pidentity,
+      </if>
+      <if test="image != null" >
+        image,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="pstatus != null" >
+        pstatus,
+      </if>
+      <if test="hid != null" >
+        hid,
+      </if>
+      <if test="ishot != null" >
+        ishot,
+      </if>
+      <if test="pdesc != null" >
+        pdesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null" >
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pnum != null" >
+        #{pnum,jdbcType=INTEGER},
+      </if>
+      <if test="marketprice != null" >
+        #{marketprice,jdbcType=DOUBLE},
+      </if>
+      <if test="shopprice != null" >
+        #{shopprice,jdbcType=DOUBLE},
+      </if>
+      <if test="pidentity != null" >
+        #{pidentity,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="pstatus != null" >
+        #{pstatus,jdbcType=INTEGER},
+      </if>
+      <if test="hid != null" >
+        #{hid,jdbcType=VARCHAR},
+      </if>
+      <if test="ishot != null" >
+        #{ishot,jdbcType=VARCHAR},
+      </if>
+      <if test="pdesc != null" >
+        #{pdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ecg.search.pojo.po.TbProductExample" resultType="java.lang.Integer" >
+    select count(*) from tb_product
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_product
+    <set >
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pname != null" >
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pnum != null" >
+        pnum = #{record.pnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.marketprice != null" >
+        marketPrice = #{record.marketprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.shopprice != null" >
+        shopPrice = #{record.shopprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.pidentity != null" >
+        pidentity = #{record.pidentity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.image != null" >
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=DATE},
+      </if>
+      <if test="record.pstatus != null" >
+        pstatus = #{record.pstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.hid != null" >
+        hid = #{record.hid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ishot != null" >
+        ishot = #{record.ishot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pdesc != null" >
+        pdesc = #{record.pdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_product
+    set pid = #{record.pid,jdbcType=VARCHAR},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      pnum = #{record.pnum,jdbcType=INTEGER},
+      marketPrice = #{record.marketprice,jdbcType=DOUBLE},
+      shopPrice = #{record.shopprice,jdbcType=DOUBLE},
+      pidentity = #{record.pidentity,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=DATE},
+      pstatus = #{record.pstatus,jdbcType=INTEGER},
+      hid = #{record.hid,jdbcType=VARCHAR},
+      ishot = #{record.ishot,jdbcType=VARCHAR},
+      pdesc = #{record.pdesc,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_product
+    set pid = #{record.pid,jdbcType=VARCHAR},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      pnum = #{record.pnum,jdbcType=INTEGER},
+      marketPrice = #{record.marketprice,jdbcType=DOUBLE},
+      shopPrice = #{record.shopprice,jdbcType=DOUBLE},
+      pidentity = #{record.pidentity,jdbcType=VARCHAR},
+      image = #{record.image,jdbcType=VARCHAR},
+      createdate = #{record.createdate,jdbcType=DATE},
+      pstatus = #{record.pstatus,jdbcType=INTEGER},
+      hid = #{record.hid,jdbcType=VARCHAR},
+      ishot = #{record.ishot,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecg.search.pojo.po.TbProduct" >
+    update tb_product
+    <set >
+      <if test="pname != null" >
+        pname = #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="pnum != null" >
+        pnum = #{pnum,jdbcType=INTEGER},
+      </if>
+      <if test="marketprice != null" >
+        marketPrice = #{marketprice,jdbcType=DOUBLE},
+      </if>
+      <if test="shopprice != null" >
+        shopPrice = #{shopprice,jdbcType=DOUBLE},
+      </if>
+      <if test="pidentity != null" >
+        pidentity = #{pidentity,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="pstatus != null" >
+        pstatus = #{pstatus,jdbcType=INTEGER},
+      </if>
+      <if test="hid != null" >
+        hid = #{hid,jdbcType=VARCHAR},
+      </if>
+      <if test="ishot != null" >
+        ishot = #{ishot,jdbcType=VARCHAR},
+      </if>
+      <if test="pdesc != null" >
+        pdesc = #{pdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where pid = #{pid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ecg.search.pojo.po.TbProduct" >
+    update tb_product
+    set pname = #{pname,jdbcType=VARCHAR},
+      pnum = #{pnum,jdbcType=INTEGER},
+      marketPrice = #{marketprice,jdbcType=DOUBLE},
+      shopPrice = #{shopprice,jdbcType=DOUBLE},
+      pidentity = #{pidentity,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      pstatus = #{pstatus,jdbcType=INTEGER},
+      hid = #{hid,jdbcType=VARCHAR},
+      ishot = #{ishot,jdbcType=VARCHAR},
+      pdesc = #{pdesc,jdbcType=LONGVARCHAR}
+    where pid = #{pid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecg.search.pojo.po.TbProduct" >
+    update tb_product
+    set pname = #{pname,jdbcType=VARCHAR},
+      pnum = #{pnum,jdbcType=INTEGER},
+      marketPrice = #{marketprice,jdbcType=DOUBLE},
+      shopPrice = #{shopprice,jdbcType=DOUBLE},
+      pidentity = #{pidentity,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      createdate = #{createdate,jdbcType=DATE},
+      pstatus = #{pstatus,jdbcType=INTEGER},
+      hid = #{hid,jdbcType=VARCHAR},
+      ishot = #{ishot,jdbcType=VARCHAR}
+    where pid = #{pid,jdbcType=VARCHAR}
+  </update>
+</mapper>

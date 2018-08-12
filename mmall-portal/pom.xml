@@ -12,6 +12,13 @@
 
     <artifactId>mmall-portal</artifactId>
     <packaging>pom</packaging>
+    <modules>
+        <module>mmall-portal-dao</module>
+        <module>mmall-portal-pojo</module>
+        <module>mmall-portal-interface</module>
+        <module>mmall-portal-service</module>
+        <module>mmall-portal-web</module>
+    </modules>
 
     <dependencies>
         <dependency>

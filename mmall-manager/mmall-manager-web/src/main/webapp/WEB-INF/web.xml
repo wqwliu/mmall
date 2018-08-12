@@ -45,4 +45,12 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+    <servlet-name>checkImgServlet</servlet-name>
+    <url-pattern>/checkImgServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>checkImgServlet</servlet-name>
+    <servlet-class>com.ecg.utils.CheckImgServlet</servlet-class>
+  </servlet>
 </web-app>

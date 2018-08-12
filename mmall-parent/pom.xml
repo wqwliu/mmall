@@ -11,6 +11,9 @@
         <module>../mmall-common</module>
         <module>../mmall-manager</module>
         <module>../mmall-portal</module>
+        <module>../mmall-product</module>
+        <module>../mmall-search-web</module>
+        <module>../mmall-cart-web</module>
     </modules>
 
     <packaging>pom</packaging>

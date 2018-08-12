@@ -4,7 +4,9 @@ import com.ecg.manager.pojo.dto.ProductQuery;
 import com.ecg.manager.pojo.dto.ProductResult;
 import com.ecg.manager.pojo.po.TbProduct;
 import com.ecg.manager.pojo.vo.TbProductCustom;
+import org.apache.solr.client.solrj.SolrServerException;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -67,4 +69,8 @@ public interface ProductService {
      */
     int updateProduct(TbProduct product);
 
+    /**
+     * solr传入搜索数据
+     */
+    void importSearchItem() throws IOException, SolrServerException;
 }

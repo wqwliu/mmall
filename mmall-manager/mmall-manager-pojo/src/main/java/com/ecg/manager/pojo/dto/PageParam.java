@@ -28,7 +28,10 @@ public class PageParam {
         this.limit = limit;
     }
 
-    //设置一个offset(分页用的当页第一个页码),只要使用给page和limit赋值，那么offset自动计算出来
+    /**
+     * 设置一个offset(分页用的当页第一个页码),只要使用给page和limit赋值，那么offset自动计算出来
+     * @return int
+     */
     public int getOffset() {
         return (page - 1) * limit;
     }

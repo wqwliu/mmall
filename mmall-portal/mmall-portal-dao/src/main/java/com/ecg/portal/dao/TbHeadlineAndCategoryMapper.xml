@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ecg.portal.dao.TbHeadlineAndCategoryMapper" >
+  <select id="selectByHid" resultType="com.ecg.portal.pojo.TbHeadLineAndCategory">
+    SELECT
+    h.hid,h.parend_id parendId,h.image,h.title,b.tcname,m.pid
+    FROM tb_headline h
+    LEFT JOIN tb_headlinecategory b
+    ON h.parend_Id=b.tcid
+    LEFT JOIN tb_product m
+    ON m.hid=h.hid
+    where h.parend_Id=#{parendId}
+    LIMIT 1,18
+  </select>
+</mapper>

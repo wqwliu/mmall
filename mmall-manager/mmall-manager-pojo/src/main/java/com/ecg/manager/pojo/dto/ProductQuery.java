@@ -12,10 +12,9 @@ public class ProductQuery {
 
     private String pname;
     private String pid;
-    private String pstatus;
     private String hid;
-    private String ishot;
-    private String title;
+    private Double priceMin;
+    private Double priceMax;
 
     public String getPname() {
         return pname;
@@ -33,14 +32,6 @@ public class ProductQuery {
         this.pid = pid;
     }
 
-    public String getPstatus() {
-        return pstatus;
-    }
-
-    public void setPstatus(String pstatus) {
-        this.pstatus = pstatus;
-    }
-
     public String getHid() {
         return hid;
     }
@@ -49,19 +40,19 @@ public class ProductQuery {
         this.hid = hid;
     }
 
-    public String getIshot() {
-        return ishot;
+    public Double getPriceMin() {
+        return priceMin;
     }
 
-    public void setIshot(String ishot) {
-        this.ishot = ishot;
+    public void setPriceMin(Double priceMin) {
+        this.priceMin = priceMin;
     }
 
-    public String getTitle() {
-        return title;
+    public Double getPriceMax() {
+        return priceMax;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPriceMax(Double priceMax) {
+        this.priceMax = priceMax;
     }
 }
